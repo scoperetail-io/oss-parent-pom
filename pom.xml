@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Scoperetail's Parent POM for all Open Source Code</description>
-    <url>https://github.com/scoperetail-io/oss-parent-pom</url>
+    <url>https://github.com/scoperetail-io/${project.artifactId}</url>
     <licenses>
         <license>
             <name>The MIT License</name>
@@ -23,6 +23,12 @@
             <id>Tushar Agrawal</id>
         </developer>
     </developers>
+    <scm>
+        <developerConnection>
+            scm:git:git@github.com:scoperetail-io/${project.artifactId}.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
     <repositories>
         <repository>
             <id>maven-central</id>
