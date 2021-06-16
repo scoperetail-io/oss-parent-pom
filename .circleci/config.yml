@@ -2,7 +2,7 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 orbs:
-  marvel: scoperetail/marvel@dev:374ba8b
+  marvel: scoperetail/marvel@dev:1e1f381
 
 workflows:
   build-and-test:
