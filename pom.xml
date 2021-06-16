@@ -4,7 +4,7 @@
 
     <groupId>com.scoperetail.pom</groupId>
     <artifactId>oss-parent-pom</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Scoperetail's Parent POM for all Open Source Code</description>
@@ -25,7 +25,7 @@
         <developerConnection>
             scm:git:git@github.com:scoperetail-io/${project.artifactId}.git
         </developerConnection>
-        <tag>oss-parent-pom-1.2</tag>
+        <tag>HEAD</tag>
     </scm>
     <repositories>
         <repository>
