@@ -9,8 +9,8 @@ workflows:
     jobs:
       - marvel/maven-deploy:
           context:
+            - OSSRH
             - SLACK
-            - ARTIFACTORY
           filters:
             branches:
               ignore:
@@ -20,7 +20,6 @@ workflows:
           context:
             - OSSRH
             - SLACK
-            - ARTIFACTORY
           filters:
             branches:
               only:
