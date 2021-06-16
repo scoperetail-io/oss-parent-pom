@@ -70,7 +70,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>${maven-compiler-plugin.version}</version>
+                                    <version>3.6</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
