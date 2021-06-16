@@ -23,6 +23,29 @@
             <id>Tushar Agrawal</id>
         </developer>
     </developers>
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <name>maven</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -44,8 +67,18 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>scoperetail-io</sonar.organization>
         <sonar.projectKey>${sonar.organization}_${project.artifactId}</sonar.projectKey>
+        <sonar.exclusions>
+            com/**/**Test**.java
+        </sonar.exclusions>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
+        <!--        SONAR   -->
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <mapstruct.version>1.3.1.Final</mapstruct.version>
+        <lombok.version>1.18.12</lombok.version>
+
     </properties>
     <build>
         <plugins>
@@ -55,6 +88,19 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>${java.version}</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <generatedSourcesDirectory>${project.build.directory}/generated-sources</generatedSourcesDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -107,6 +153,24 @@
                             <fail>true</fail>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>enforce-dont-exist</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireFilesDontExist>
+                                    <files>
+                                        <file>${project.basedir}/mvnw</file>
+                                        <file>${project.basedir}/mvnw.cmd</file>
+                                        <file>${project.basedir}/.mvn</file>
+                                    </files>
+                                </requireFilesDontExist>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -147,6 +211,23 @@
         </plugins>
     </build>
     <profiles>
+        <profile>
+            <id>deploy</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+
+        </profile>
         <profile>
             <id>release</id>
             <build>
