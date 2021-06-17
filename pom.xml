@@ -28,6 +28,7 @@
             scm:git:git@github.com:scoperetail-io/${project.artifactId}.git
         </developerConnection>
         <tag>HEAD</tag>
+        <url>https://github.com/scoperetail-io/${project.artifactId}</url>
     </scm>
     <repositories>
         <repository>
